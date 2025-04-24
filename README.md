@@ -29,8 +29,8 @@ A modern cryptocurrency price tracker built with React and Redux Toolkit. This a
 4. Open your browser and navigate to `http://localhost:5173`
 
 ## Screenshots
+![Alt text]("C:\Users\rajpo\OneDrive\Pictures\Screenshots\Screenshot 2025-04-25 010207.png")
 
-(Add screenshots of your application here)
 
 ## Future Enhancements
 
