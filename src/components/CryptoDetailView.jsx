@@ -9,6 +9,7 @@ import {
 import { formatNumber } from '../services/mockData';
 import FavoriteToggle from './FavoriteToggle';
 import CryptoIcon from './CryptoIcon';
+import PriceChart from './PriceChart';
 
 const DetailContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
@@ -161,7 +162,7 @@ const CryptoDetailView = () => {
   const crypto = useSelector(selectSelectedCrypto);
   const isFavorite = useSelector(state => crypto ? selectIsCryptoFavorite(state, crypto.id) : false);
   
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('chart');
   
   const handleBack = () => {
     dispatch(setSelectedCryptoId(null));
@@ -237,24 +238,34 @@ const CryptoDetailView = () => {
         
         <TabsContainer>
           <TabButton 
-            active={activeTab === 'overview'}
+            active={activeTab === 'chart'} 
+            onClick={() => setActiveTab('chart')}
+          >
+            Price Chart
+          </TabButton>
+          <TabButton 
+            active={activeTab === 'overview'} 
             onClick={() => setActiveTab('overview')}
           >
             Overview
           </TabButton>
           <TabButton 
-            active={activeTab === 'markets'}
+            active={activeTab === 'markets'} 
             onClick={() => setActiveTab('markets')}
           >
             Markets
           </TabButton>
           <TabButton 
-            active={activeTab === 'historical'}
+            active={activeTab === 'historical'} 
             onClick={() => setActiveTab('historical')}
           >
             Historical Data
           </TabButton>
         </TabsContainer>
+        
+        {activeTab === 'chart' && (
+          <PriceChart crypto={crypto} />
+        )}
         
         {activeTab === 'overview' && (
           <div>
