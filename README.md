@@ -29,9 +29,10 @@ A modern cryptocurrency price tracker built with React and Redux Toolkit. This a
 4. Open your browser and navigate to `http://localhost:5173`
 
 ## Screenshots
-<img src="![Screenshot 2025-04-25 010207](https://github.com/user-attachments/assets/409ea4d4-98f5-40d1-91c0-bf84aa09d1b3)
-">
 
+![Screenshot 2025-04-25 010143](https://github.com/user-attachments/assets/58c8e4f9-339e-4be6-baf8-7be70aadb125)
+
+![Screenshot 2025-04-25 010207](https://github.com/user-attachments/assets/d10616ae-3520-4a64-92f5-f438a3bca1fc)
 
 ## Future Enhancements
 
