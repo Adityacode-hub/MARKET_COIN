@@ -9,8 +9,6 @@ import {
 import { formatNumber } from '../services/mockData';
 import FavoriteToggle from './FavoriteToggle';
 import CryptoIcon from './CryptoIcon';
-import PriceChart from './PriceChart';
-import { exportAsCSV, exportAsJSON } from '../utils/exportUtils';
 
 const DetailContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.surface};
@@ -145,7 +143,7 @@ const TabsContainer = styled.div`
 const TabButton = styled.button`
   background: none;
   border: none;
-  border-bottom: 2px solid ${({ theme, active }) => 
+  border-bottom: 2px solid ${({ theme, active }) =>
     active ? theme.colors.primary : 'transparent'};
   color: ${({ theme, active }) => 
     active ? theme.colors.primary : theme.colors.text.primary};
@@ -158,47 +156,15 @@ const TabButton = styled.button`
   }
 `;
 
-const ExportButtonsContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-`;
-
-const ExportButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 8px 12px;
-  font-size: 14px;
-  cursor: pointer;
-  
-  &:hover {
-    opacity: 0.9;
-  }
-`;
-
 const CryptoDetailView = () => {
   const dispatch = useDispatch();
   const crypto = useSelector(selectSelectedCrypto);
   const isFavorite = useSelector(state => crypto ? selectIsCryptoFavorite(state, crypto.id) : false);
   
-  const [activeTab, setActiveTab] = useState('chart');
+  const [activeTab, setActiveTab] = useState('overview');
   
   const handleBack = () => {
     dispatch(setSelectedCryptoId(null));
-  };
-  
-  const handleExportCSV = () => {
-    if (crypto) {
-      exportAsCSV([crypto], `${crypto.symbol}-data`);
-    }
-  };
-  
-  const handleExportJSON = () => {
-    if (crypto) {
-      exportAsJSON([crypto], `${crypto.symbol}-data`);
-    }
   };
   
   if (!crypto) return null;
@@ -269,38 +235,32 @@ const CryptoDetailView = () => {
           </StatItem>
         </StatsGrid>
         
-        <ExportButtonsContainer>
-          <ExportButton onClick={handleExportCSV}>
-            Export as CSV
-          </ExportButton>
-          <ExportButton onClick={handleExportJSON}>
-            Export as JSON
-          </ExportButton>
-        </ExportButtonsContainer>
-        
         <TabsContainer>
           <TabButton 
-            active={activeTab === 'chart'} 
-            onClick={() => setActiveTab('chart')}
+            active={activeTab === 'overview'}
+            onClick={() => setActiveTab('overview')}
           >
-            Price Chart
+            Overview
           </TabButton>
           <TabButton 
-            active={activeTab === 'markets'} 
+            active={activeTab === 'markets'}
             onClick={() => setActiveTab('markets')}
           >
             Markets
           </TabButton>
           <TabButton 
-            active={activeTab === 'historical'} 
+            active={activeTab === 'historical'}
             onClick={() => setActiveTab('historical')}
           >
             Historical Data
           </TabButton>
         </TabsContainer>
         
-        {activeTab === 'chart' && (
-          <PriceChart crypto={crypto} />
+        {activeTab === 'overview' && (
+          <div>
+            <h3>About {crypto.name}</h3>
+            <p>Detailed information about {crypto.name} would be displayed here.</p>
+          </div>
         )}
         
         {activeTab === 'markets' && (
